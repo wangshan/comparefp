@@ -2,8 +2,6 @@
 
 #include <gtest/gtest.h>
 
-#include <iostream>
-
 using namespace ::testing;
 using namespace ::useful;
 
@@ -22,9 +20,8 @@ TEST(CompareFPTest, testFloatingPointAlmostEqual)
     EXPECT_FALSE(a1.almostEqual(a3));
 
     double x4 = x1 - x2;
-    std::cout<<"x4="<<x4<<std::endl;
     FloatingPoint<double> a4(x4);
-    EXPECT_TRUE(a4.almostEqual(0.0));
+    EXPECT_TRUE(a4.almostEqual(0.0))<<"x4="<<x4;
 
     {
         double d1 = 12345678.9999999;
@@ -55,8 +52,7 @@ TEST(CompareFPTest, testNonMemberAlmostEqual)
     EXPECT_TRUE(almostEqual(x1, x3));
 
     double x4 = x1 - x2;
-    std::cout<<"x4="<<x4<<std::endl;
-    EXPECT_TRUE(almostEqual(x4, 0.0));
+    EXPECT_TRUE(almostEqual(x4, 0.0))<<"x4="<<x4;
 
     {
         double d1 = 12345678.9999999;
