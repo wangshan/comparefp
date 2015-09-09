@@ -102,6 +102,24 @@ inline bool almostEqual(double a, double b, double maxDiff=FLT_EPSILON)
     return FloatingPoint<double>(a).almostEqual(b);
 }
 
+inline bool almostEqual(float a, float b, float maxDiff=FLT_EPSILON)
+{
+    if (std::isnan(a) || std::isnan(b)) {
+        return false;
+    }
+
+    // if two numbers are really close, consider them equal, useful when
+    // comparing numbers close to 0, because the ulp of those numbers can be
+    // enourmous, but this means if maxDiff is too big, the ulp comparison will
+    // never be invoked
+    float absDiff = std::fabs(a - b);
+    if (absDiff <= maxDiff) {
+        return true;
+    }
+
+    return FloatingPoint<float>(a).almostEqual(b);
+}
+
 }
 
 #endif
